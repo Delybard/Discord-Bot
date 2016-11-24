@@ -96,6 +96,13 @@ bot.registerCommand("pout", "https://i.imgur.com/bah45ys.jpg", { // Post url
     fullDescription: ":T - https://i.imgur.com/bah45ys.jpg"
 });
 
+bot.registerCommand("lewd", "http://i.imgur.com/d1G2lzl.png", { // Post url
+	caseInsensitive: true,
+	deleteCommand: true,
+    description: "lewd",
+    fullDescription: "lewd - http://i.imgur.com/d1G2lzl.png"
+});
+
 bot.registerCommand("clap", "https://gfycat.com/NeatWearyBluemorphobutterfly", { // Make a boii command
 	caseInsensitive: true,
 	deleteCommand: true,
