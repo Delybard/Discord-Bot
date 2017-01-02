@@ -72,7 +72,8 @@ var bot_commands = [{cmd: "ping", action: "Pong!", desc: "Pong!"},
 	{cmd: "pout", action: "https://i.imgur.com/bah45ys.jpg", desc: ":T"},
 	{cmd: "lewd", action: "http://i.imgur.com/3eeaBJA.gif", desc: "lewd"},
 	{cmd: "clap", action: "https://gfycat.com/NeatWearyBluemorphobutterfly", desc: "Puck clap"},
-	{cmd: "boii", action: "https://puu.sh/rl3qP/0d01ac5c82.jpg", desc: "Boii"}];
+	{cmd: "boii", action: "https://puu.sh/rl3qP/0d01ac5c82.jpg", desc: "Boii"},
+	{cmd: "source", action: "https://github.com/Delybard/Discord-Bot", desc: "Bots Sourcecode"}];
 
 for (var i = 0; i < bot_commands.length; i++){
     bot.registerCommand(bot_commands[i].cmd, bot_commands[i].action, {
