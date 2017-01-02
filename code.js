@@ -27,95 +27,61 @@ bot.on("guildMemberRemove", (guild, member) => {
 
 //Banphrasing test
 //Since it's currently only one word, it's kept very very simple
-function stringMatchingStuff(str){
-	var arr = ["o", "ó", "ò", "ô", "ö", "ø", "ð", "õ", "*"]
-	if((str.charAt(1) === "c") || (str.charAt(1) === "ç")){
-		var a = str.charAt(0), b = str.charAt(2);
-		for(i = 0; i < arr.length; i++){
-			for(j = 0; j < arr.length; j++){
-				if((a === arr[i]) && (b === arr[j])){
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
+//function stringMatchingStuff(str){
+//	var arr = ["o", "ó", "ò", "ô", "ö", "ø", "ð", "õ", "*"]
+//	if((str.charAt(1) === "c") || (str.charAt(1) === "ç")){
+//		var a = str.charAt(0), b = str.charAt(2);
+//		for(i = 0; i < arr.length; i++){
+//			for(j = 0; j < arr.length; j++){
+//				if((a === arr[i]) && (b === arr[j])){
+//					return true;
+//				}
+//			}
+//		}
+//	}
+//	return false;
+//}
 
 //In case someone sends a message, check for banphrases
-bot.on("messageCreate", (msg) => {
-	var trimStr = msg.content.trim();
-	var lc = trimStr.toLowerCase();
-	for (i = 0; i < lc.length; i++){
-		if((lc.charAt(i) == "p") || (lc.charAt(i) == "þ")){
-			if(stringMatchingStuff(lc.substr(i+1,3))){
-				msg.delete();
-			}
-		}
-	}
-});
+//bot.on("messageCreate", (msg) => {
+//	var trimStr = msg.content.trim();
+//	var lc = trimStr.toLowerCase();
+//	for (i = 0; i < lc.length; i++){
+//		if((lc.charAt(i) == "p") || (lc.charAt(i) == "þ")){
+//			if(stringMatchingStuff(lc.substr(i+1,3))){
+//				msg.delete();
+//			}
+//		}
+//	}
+//});
 
 //In case someone edits his message, check for banphrases
-bot.on("messageUpdate", (msg) => {
-	var trimStr = msg.content.trim();
-	var lc = trimStr.toLowerCase();
-	for (i = 0; i < lc.length; i++){
-		if((lc.charAt(i) == "p") || (lc.charAt(i) == "þ")){
-			if(stringMatchingStuff(lc.substr(i+1,3))){
-				msg.delete();
-			}
-		}
-	}
-});
+//bot.on("messageUpdate", (msg) => {
+//	var trimStr = msg.content.trim();
+//	var lc = trimStr.toLowerCase();
+//	for (i = 0; i < lc.length; i++){
+//		if((lc.charAt(i) == "p") || (lc.charAt(i) == "þ")){
+//			if(stringMatchingStuff(lc.substr(i+1,3))){
+//				msg.delete();
+//			}
+//		}
+//	}
+//});
 
-bot.registerCommandAlias("halp", "help"); // Alias !halp to !help
+var bot_commands = [{cmd: "ping", action: "Pong!", desc: "Pong!"}, 
+	{cmd: "pout", action: "https://i.imgur.com/bah45ys.jpg", desc: ":T"},
+	{cmd: "lewd", action: "http://i.imgur.com/3eeaBJA.gif", desc: "lewd"},
+	{cmd: "clap", action: "https://gfycat.com/NeatWearyBluemorphobutterfly", desc: "Puck clap"},
+	{cmd: "boii", action: "https://puu.sh/rl3qP/0d01ac5c82.jpg", desc: "Boii"}];
 
-bot.registerCommand("ping", "Pong!", { // Make a ping command
-	caseInsensitive: true,
-    description: "Pong!",
-    fullDescription: "Ping Pong"
-});
-
-bot.registerCommand("pong", (msg, args) => {
-	var arr = ["Pang!", "Peng!", "Ping!", "Pung!", "uguu!"];
-	var number = Math.floor(Math.random()*(arr.length - 1))+ 1;
-	var text = "fail";
-	var text = arr[number];
-    bot.createMessage(msg.channel.id, text);
-}, { // Make a pong command
-	//Responds with a random version of "Ping!" when someone says "!pong"
-	caseInsensitive: true,
-	description: "Ping!",
-	fullDescription: "returns either 'Pang!', 'Peng!', Ping!', Pung!' or a special meme",
-});
-
-bot.registerCommand("pout", "https://i.imgur.com/bah45ys.jpg", { // Post url
-	caseInsensitive: true,
-	deleteCommand: true,
-    description: ":T",
-    fullDescription: ":T - https://i.imgur.com/bah45ys.jpg"
-});
-
-bot.registerCommand("lewd", "http://i.imgur.com/d1G2lzl.png", { // Post url
-	caseInsensitive: true,
-	deleteCommand: true,
-    description: "lewd",
-    fullDescription: "lewd - http://i.imgur.com/d1G2lzl.png"
-});
-
-bot.registerCommand("clap", "https://gfycat.com/NeatWearyBluemorphobutterfly", { // Make a boii command
-	caseInsensitive: true,
-	deleteCommand: true,
-    description: "\*clap\* \*clap\* \*clap\*",
-    fullDescription: "Puck Clap - https://gfycat.com/NeatWearyBluemorphobutterfly"
-});
-
-bot.registerCommand("boii", "https://puu.sh/rl3qP/0d01ac5c82.jpg", { // Make a boii command
-	caseInsensitive: true,
-	deleteCommand: true,
-    description: "Boii",
-    fullDescription: "Beetlejuice boii - https://puu.sh/rl3qP/0d01ac5c82.jpg"
-});
+for (var i = 0; i < bot_commands.length; i++){
+    bot.registerCommand(bot_commands[i].cmd, bot_commands[i].action, {
+        caseInsensitive: true,
+        deleteCommand: true,
+        description: bot_commands[i].desc,
+        fullDescription: bot_commands[i].desc + " - " + bot_commands[i].action
+    });
+}
 
 var translateCommand = bot.registerCommand("translate", (msg, args) => { // Make an echo command
     if(args.length === 0) { // If the user only typed "!translate", say "Invalid input"
@@ -175,7 +141,7 @@ echoCommand.registerSubcommand("reverse", (msg, args) => { // Make a reverse sub
     usage: "<text>"
 });
 
-bot.registerCommand("gmod", " Do you want to play Garry's Mod? If so, please reply!", {
+bot.registerCommand("gmod", "@everyone Do you want to play Garry's Mod? If so, please reply!", {
 	//Requirements
 	requirements: {
 	roleNames: ["chosen one"]
@@ -190,5 +156,7 @@ bot.registerCommand("gmod", " Do you want to play Garry's Mod? If so, please rep
 	permissionMessage: "Sorry, but you are not a chosen one"});
 
 echoCommand.registerSubcommandAlias("backwards", "reverse"); // Alias "!echo backwards" to "!echo reverse"
+
+bot.registerCommandAlias("halp", "help"); // Alias !halp to !help
 
 bot.connect(); // Get the bot to connect to Discord
