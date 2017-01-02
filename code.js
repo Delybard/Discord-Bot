@@ -88,23 +88,6 @@ var translateCommand = bot.registerCommand("translate", (msg, args) => { // Make
         return "Invalid input";
     }
 	return "Sorry, but I'm not working yet :(";
-	var request = require('request');
-	var cheerio = require('cheerio');
-	var tranText, tranText2;
-	var url = "https://translate.google.de/?hl=de#auto/ja/" + args;
-	request(url, function(error, response, body){
-		if(!error){
-			var $ = cheerio.load(body);
-			console.log("request url no error");
-			tranText = $(this).find('span#result_box.short_text').html();
-			console.log(tranText);
-			tranText2 = $(this).find('div#res-translit.translit').html();
-			console.log(tranText2);
-		} else {
-			console.log("An error appeared" + error);
-		}
-	})
-	return tranText + " and that's how u spell it: " + tranText2;
 }, {
 	caseInsensitive: true,
     description: "Translate any language to Japanese",
